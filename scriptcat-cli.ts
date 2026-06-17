@@ -1,5 +1,5 @@
-import { resolve as resovePath, toFileUrl } from "jsr:@std/path";
-import { walk } from "jsr:@std/fs";
+import { resolve as resovePath, toFileUrl } from "@std/path";
+import { walk } from "@std/fs";
 
 export type Action = Hello | OnChange;
 
@@ -247,8 +247,8 @@ export class Cli {
   }
 }
 
-import { cliteRun } from "jsr:@g9wp/clite";
+import { cliteRun } from "@g9wp/clite";
 
 if (import.meta.main) {
-  cliteRun(Cli);
+  await cliteRun(Cli);
 }

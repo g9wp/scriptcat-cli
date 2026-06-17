@@ -1,0 +1,14 @@
+{
+  "name": "@g9wp/scriptcat-cli",
+  "version": "0.1.0",
+  "license": "MIT",
+  "exports": "./scriptcat-cli.ts",
+  "imports": {
+    "@g9wp/clite": "jsr:@g9wp/clite@^0.7.9",
+    "@std/fs": "jsr:@std/fs@^1.0.24",
+    "@std/path": "jsr:@std/path@^1.1.5"
+  },
+  "fmt": {
+    "lineWidth": 120
+  }
+}
