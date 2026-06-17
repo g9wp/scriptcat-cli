@@ -36,11 +36,11 @@ export class ScriptCat {
     this.serve();
   }
 
-  clients = new Map<WebSocket, ClientInfo>();
+  clients: Map<WebSocket, ClientInfo> = new Map();
 
   _serve!: ReturnType<typeof Deno.serve>;
 
-  serve() {
+  serve(): ReturnType<typeof Deno.serve> {
     if (this._serve) return this._serve;
     // 2. 启动 WebSocket 服务
     this._serve = Deno.serve({ port: this.port }, (req) => {
@@ -126,7 +126,7 @@ export class ScriptCat {
   }
 
   // 3. 文件监听与防抖逻辑
-  debounceTimers = new Map<string, ReturnType<typeof setTimeout>>();
+  debounceTimers: Map<string, ReturnType<typeof setTimeout>> = new Map();
   debounce_delay = 150;
 
   handleFileChangeDebounced(path: string) {
@@ -193,7 +193,7 @@ export class Cli {
   heartbeat = 30000; // 每 30 秒发送一次 hello 心跳
   debounce = 150;
 
-  get _sc() {
+  get _sc(): ScriptCat {
     return new ScriptCat({
       port: this.port,
       heartbeat: this.heartbeat,
@@ -201,7 +201,7 @@ export class Cli {
     });
   }
 
-  async send(...userjs: string[]) {
+  async send(...userjs: string[]): Promise<void> {
     if (userjs.length == 0) {
       userjs = (await Array.fromAsync(walk(this.dir, { exts: [this.ext] })))
         .map((f) => f.path);
@@ -241,7 +241,7 @@ export class Cli {
   }
 
   w: boolean = true;
-  main(...userjs: string[]) {
+  main(...userjs: string[]): Promise<void> {
     if (this.w) return this.watch();
     return this.send(...userjs);
   }
